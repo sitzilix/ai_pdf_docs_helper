@@ -1,0 +1,26 @@
+# Переменные окружения и секреты (КРИТИЧНО!)
+.env
+*.env
+!.env.example
+
+# Виртуальное окружение
+.venv/
+venv/
+env/
+
+# Кэш и байт-код Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Мусор macOS и IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Локальные данные и логи
+*.log
+postgres_data/

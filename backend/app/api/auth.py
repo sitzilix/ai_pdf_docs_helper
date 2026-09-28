@@ -19,15 +19,8 @@ async def register(
     user_data: UserCreate,
     db: AsyncSession = Depends(get_db)
 ):
-    try:
-        user = await AuthService.register(db, user_data)
-        return user
-    
-    except EmailAlreadyExistsError as e:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=str(e)
-        )
+    user = await AuthService.register(db, user_data)
+    return user
         
 @router.post("/login", response_model=Token)
 async def login(

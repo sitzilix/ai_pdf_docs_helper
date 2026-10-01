@@ -39,11 +39,21 @@ class Source(Base):
         index=True,
     )
     type: Mapped[SourceType] = mapped_column(
-        SAEnum(SourceType, name="source_type", native_enum=True),
+        SAEnum(
+            SourceType, 
+            name="source_type", 
+            native_enum=True, 
+            values_callable=lambda e: [m.value for m in e],
+        ),
         nullable=False,
     )
     status: Mapped[SourceStatus] = mapped_column(
-        SAEnum(SourceStatus, name="source_status", native_enum=True),
+        SAEnum(
+            SourceStatus, 
+            name="source_status", 
+            native_enum=True,
+            values_callable=lambda e: [m.value for m in e],
+        ),
         default=SourceStatus.UPLOADED,
         nullable=False,
         index=True,

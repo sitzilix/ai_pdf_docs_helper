@@ -39,7 +39,12 @@ class Investigation(Base):
     title: Mapped[str] = mapped_column(String(500), nullable=False)
     task: Mapped[str] = mapped_column(Text, nullable=False)
     status: Mapped[InvestigationStatus] = mapped_column(
-        SAEnum(InvestigationStatus, name="investigation_status", native_enum=True),
+        SAEnum(
+            InvestigationStatus, 
+            name="investigation_status", 
+            native_enum=True,
+            values_callable=lambda e: [m.value for m in e],
+        ),
         default=InvestigationStatus.PENDING,
         nullable=False,
         index=True,
@@ -82,7 +87,12 @@ class Message(Base):
         index=True,
     )
     role: Mapped[MessageRole] = mapped_column(
-        SAEnum(MessageRole, name="message_role", native_enum=True),
+        SAEnum(
+            MessageRole, 
+            name="message_role",
+            native_enum=True, 
+            values_callable=lambda e: [m.value for m in e],
+        ),
         nullable=False,
     )
     content: Mapped[str] = mapped_column(Text, nullable=False)
